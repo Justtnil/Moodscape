@@ -1,63 +1,96 @@
-Moodscape 🌄
+# Moodscape 🌄
 
-Moodscape is a modern, offline-first mood journaling application for Android, built entirely with Kotlin and Jetpack Compose. It's designed to be a private, personal sanctuary for users to track their emotional landscape, discover patterns, and reflect on their well-being without relying on the cloud.
+**A modern, offline-first mood journaling application for Android, built with 100% Kotlin and Jetpack Compose.**
 
-This project was developed as a comprehensive case study in modern Android development, focusing on robust architecture, user-centric features, and a commitment to privacy.
+## About The Project
 
-✨ Core Features
+Moodscape is designed as a private, personal sanctuary for users to track their emotional landscape, discover patterns, and reflect on their well-being without relying on the cloud. All data is stored locally on-device, ensuring the app is 100% functional without an internet connection and that your personal information remains yours alone.
 
-    Daily Mood Logging: An intuitive interface to log your mood with a custom emoji, a detailed note, and a score (1-5).
+This project serves as a comprehensive case study in modern Android development, focusing on robust architecture, user-centric features, and a steadfast commitment to privacy.
 
-    Visual Calendar: A clean, full-screen calendar that provides an at-a-glance heatmap of your mood history.
+---
 
-    Offline-First Architecture: All data is stored locally on your device using a robust Room database, ensuring the app is 100% functional without an internet connection.
+## 📦 Releases
 
-    Customization:
+You can find the latest stable and pre-release APKs on the **[Releases](https://github.com/Justtnil/Moodscape/releases)** page of this repository.
 
-        Custom Moods: Add, edit, and delete your own moods with unique emojis and names.
+---
 
-        Categories: (Backend implemented) Tag entries with categories like "Work," "Health," or "Relationships" for deeper analysis.
+## ✨ Features
 
-    Offline Voice-to-Text: Use the on-device SpeechRecognizer to dictate notes directly into your mood entries, completely offline.
+### Core Journaling
+* **Daily Mood Logging:** Log your mood with a custom emoji, a detailed note, and a score (1-5).
+* **Visual Calendar:** A clean, full-screen calendar provides an at-a-glance heatmap of your mood history.
+* **Customization:** Add, edit, and delete your own moods with unique emojis and names.
+* **Categories (Backend):** The database supports tagging entries with categories like "Work" or "Health" for future analysis.
 
-    Intelligent Reminders: A WorkManager-powered background service schedules a daily notification to remind you to log your mood, but only if you haven't already.
+### Advanced Functionality
+* **Offline Voice-to-Text:** Use the on-device `SpeechRecognizer` to dictate notes directly into your mood entries, completely offline.
+* **Intelligent Reminders:** A `WorkManager`-powered background service schedules a daily notification to remind you to log your mood, but *only* if you haven't already.
+* **Mood Logbook:** A dedicated screen to view, scroll, and filter your entire mood history by various time ranges (7, 14, 30, 90 days).
 
-    Mood Logbook: A dedicated screen to view, scroll, and filter your entire mood history.
+### Data & Insights
+* **Secure Data Export:** Export your mood log for a selected time range as a PDF file directly to your device's storage using the Storage Access Framework.
+* **Rule-Based Insights Engine:** An offline analysis engine that calculates and displays meaningful insights from your data, including:
+    * Weekly mood trends.
+    * Correlations between moods and days of the week.
+    * Keyword clustering in notes for less positive moods.
 
-    Data Export: Export your mood log for a selected time range as a PDF file directly to your device's storage using the Storage Access Framework.
+---
 
-    Rule-Based Insights Engine: An offline analysis engine that calculates and displays meaningful insights from your data, such as:
+## 🛠️ Tech Stack & Architecture
 
-        Weekly mood trends.
+This project is built with a modern, robust, and scalable tech stack.
 
-        Correlations between moods and days of the week.
+* **Language:** 100% [Kotlin](https://kotlinlang.org/)
+* **UI:** [Jetpack Compose](https://developer.android.com/jetpack/compose) for a fully declarative and modern UI.
+* **Architecture:** MVVM (Model-View-ViewModel)
+* **Database:** [Room](https://developer.android.com/training/data-storage/room) for local persistence, including an FTS5 table for efficient full-text searching.
+* **Asynchronous Programming:** Kotlin Coroutines and Flows for managing background threads and data streams.
+* **Background Processing:** [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) for reliable, scheduled background tasks.
+* **Navigation:** [Navigation Compose](https://developer.android.com/jetpack/compose/navigation) for handling screen transitions.
 
-        Keyword clustering in your notes for less positive moods.
+---
 
-🛠️ Tech Stack & Architecture
+## 🚀 Getting Started
 
-    Language: 100% Kotlin
+To get a local copy up and running, follow these simple steps.
 
-    UI: Jetpack Compose for a fully declarative and modern UI.
+### Prerequisites
 
-    Architecture: MVVM (Model-View-ViewModel)
+* Android Studio (latest stable version recommended)
+* An Android device or emulator running API level 31 or higher
 
-    Database: Room for robust, local persistence.
+### Installation
 
-        Includes an FTS5 table for efficient full-text searching in notes.
+1.  Clone the repo
+    ```sh
+    git clone [https://github.com/your-username/moodscape.git](https://github.com/your-username/moodscape.git)
+    ```
+2.  Open the project in Android Studio.
+3.  Let Gradle sync and download the required dependencies.
+4.  Build and run the app on your device or emulator.
 
-    Asynchronous Programming: Kotlin Coroutines and Flows for managing background threads and data streams.
+---
 
-    Background Processing: WorkManager for reliable, scheduled background tasks.
+## 🔮 Future Goals
 
-    Navigation: Navigation Compose for handling screen transitions.
+The "Analysis" feature is designed to be a launchpad for more advanced functionality. The next major step is to integrate a small, on-device **Large Language Model (LLM)** to provide more nuanced, generative insights based on the user's mood and note history, all while maintaining complete user privacy.
 
-    Dependency Injection: Manual (via ViewModelFactory) for simplicity.
+---
 
-🚀 Future Work
+## 🤝 Contributing
 
-This project has a solid foundation, but there's always room to grow. The "Analysis" feature is designed to be a launchpad for more advanced functionality. The next major step would be to integrate a small, on-device Large Language Model (LLM) to provide more nuanced, generative insights based on the user's mood and note history.
+This project is a personal portfolio piece, but contributions, forks, and suggestions are welcome! Please feel free to open an issue or submit a pull request.
 
-Contributing
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-This project is a personal portfolio piece, but feel free to fork the repository, explore the code, and experiment with your own features!
+---
+
+## 📄 License
+
+Distributed under the **GNU AGPLv3 License**. See `LICENSE` for more information.
