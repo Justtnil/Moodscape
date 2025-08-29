@@ -19,6 +19,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val moodEntryDao: MoodEntryDao
     private val moodCategoryDao: MoodCategoryDao
+    private val moodAnalysisEngine = MoodAnalysisEngine()
 
     val allEntries: StateFlow<List<MoodEntryWithCategory>>
     val allCategories: StateFlow<List<MoodCategory>>
@@ -56,6 +57,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun processVoiceNote(spokenText: String): String {
         return spokenText
+    }
+
+    fun generateMoodInsights(): MoodInsights {
+        return moodAnalysisEngine.generateInsights(allEntries.value)
     }
 
     // --- UPDATED PDF EXPORT FUNCTION ---

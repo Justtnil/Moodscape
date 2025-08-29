@@ -9,15 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.moodscape.data.MoodEntryWithCategory
+import com.example.moodscape.data.MoodInsights
 import com.example.moodscape.viewmodel.MainViewModel
-
-// Placeholder for the complex insight object
-data class LocalInsight(
-    val trendMessage: String,
-    val dayOfWeekMessage: String,
-    val keywordMessage: String
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,14 +19,11 @@ fun InsightsScreen(
     onNavigateBack: () -> Unit
 ) {
     val allMoods by viewModel.allEntries.collectAsState()
-    var insight by remember { mutableStateOf<LocalInsight?>(null) }
+    var insights by remember { mutableStateOf<MoodInsights?>(null) }
 
-    // Calculate insights when the screen is first composed
+    // Calculate insights when the screen is first composed or when data changes
     LaunchedEffect(allMoods) {
-        if (allMoods.isNotEmpty()) {
-            // This is a simplified calculation. A real implementation would be more complex.
-            insight = calculateLocalInsights(allMoods)
-        }
+        insights = viewModel.generateMoodInsights()
     }
 
     Scaffold(
@@ -55,13 +45,22 @@ fun InsightsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                InsightCard("Weekly Trend", insight?.trendMessage ?: "Not enough data yet.")
+                InsightCard(
+                    title = "Weekly Trend",
+                    message = insights?.trendMessage ?: "Analyzing your mood trends..."
+                )
             }
             item {
-                InsightCard("Day of the Week", insight?.dayOfWeekMessage ?: "Not enough data yet.")
+                InsightCard(
+                    title = "Day of the Week",
+                    message = insights?.dayOfWeekMessage ?: "Discovering your weekly patterns..."
+                )
             }
             item {
-                InsightCard("Note Keywords", insight?.keywordMessage ?: "Not enough data yet.")
+                InsightCard(
+                    title = "Note Keywords",
+                    message = insights?.keywordMessage ?: "Analyzing keywords in your notes..."
+                )
             }
         }
     }
@@ -69,21 +68,21 @@ fun InsightsScreen(
 
 @Composable
 fun InsightCard(title: String, message: String) {
-    Card(elevation = CardDefaults.cardElevation(4.dp), modifier = Modifier.fillMaxWidth()) {
+    Card(
+        elevation = CardDefaults.cardElevation(4.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
         Column(Modifier.padding(16.dp)) {
-            Text(text = title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = message, style = MaterialTheme.typography.bodyLarge)
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
     }
-}
-
-// Simplified placeholder for the insight calculation logic
-fun calculateLocalInsights(entries: List<MoodEntryWithCategory>): LocalInsight {
-    // A full implementation of the rules would go here.
-    // This is a placeholder to show the UI.
-    val trend = "Your mood has been stable this week."
-    val dayOfWeek = "You seem to be happiest on Saturdays."
-    val keyword = "'Work' appears in 60% of your less positive entries."
-    return LocalInsight(trend, dayOfWeek, keyword)
 }
