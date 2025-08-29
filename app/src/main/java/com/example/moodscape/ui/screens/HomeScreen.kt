@@ -211,15 +211,15 @@ fun HomeScreen(
 
     if (showCustomizeMoodDialog) {
         CustomizeMoodsDialog(
-            moods = defaultMoodOptions.toMutableStateList(),
+            moods = defaultMoodOptions,
             onDismiss = { showCustomizeMoodDialog = false },
             onAddMood = { emoji, name, score ->
-                // This won't work as expected since we're using a copy
-                // In a real app, you'd want to manage this in a proper state
+                defaultMoodOptions.add(MoodOption(emoji, name, score))
             },
             onDeleteMood = { moodOption ->
-                // This won't work as expected since we're using a copy
-                // In a real app, you'd want to manage this in a proper state
+                if (defaultMoodOptions.size > 1) { // Prevent deleting all moods
+                    defaultMoodOptions.remove(moodOption)
+                }
             }
         )
     }
@@ -545,7 +545,7 @@ fun CategorySelector(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomizeMoodsDialog(
-    moods: List<MoodOption>,
+    moods: MutableList<MoodOption>,
     onDismiss: () -> Unit,
     onAddMood: (String, String, Int) -> Unit,
     onDeleteMood: (MoodOption) -> Unit
@@ -565,7 +565,7 @@ fun CustomizeMoodsDialog(
                         .fillMaxWidth()
                         .heightIn(max = 200.dp)
                 ) {
-                    items(moods) { mood ->
+                    items(moods.toList()) { mood -> // Convert to list to avoid concurrent modification
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()

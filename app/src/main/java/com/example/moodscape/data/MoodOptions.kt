@@ -1,8 +1,10 @@
 package com.example.moodscape.data
 
+import androidx.compose.runtime.mutableStateListOf
+
 data class MoodOption(val emoji: String, val name: String, val score: Int)
 
-val defaultMoodOptions = listOf(
+val defaultMoodOptions = mutableStateListOf(
     MoodOption("😊", "Happy", 5),
     MoodOption("😄", "Excited", 5),
     MoodOption("😐", "Neutral", 3),

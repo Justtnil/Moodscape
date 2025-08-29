@@ -1,6 +1,9 @@
 package com.example.moodscape
 
 import android.app.Application
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import androidx.work.*
 import com.example.moodscape.workers.MoodReminderWorker
 import java.util.concurrent.TimeUnit
@@ -11,7 +14,7 @@ class MoodscapeApplication : Application() {
         scheduleMoodReminder()
     }
 
-    private fun scheduleMoodReminder() {
+    fun scheduleMoodReminder() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
             .build()
