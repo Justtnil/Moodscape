@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    // Add notification permission launcher
+    // In the permission launcher callback, update this part:
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
